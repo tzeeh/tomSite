@@ -1,7 +1,20 @@
 // page init
 $(function () {
   // load navbar
-  $("#navigation").load("html/navigation.html");
+  $("#navigation").load("html/navigation.html", function () {
+    // when nav is loaded check which page loaded then add active to correct class
+    var pathname = window.location.pathname;
+    pathname = pathname.replace(/^.*[\\\/]/, '');
+    if (pathname == "blog.html") {
+      $("#blog").addClass("active");
+    } else if (pathname == "resume.html") {
+      $("#resume").addClass("active");
+    } else {
+      $("#index").addClass("active");
+    }
+
+
+  });
   // load footer
   $("#footer").load("html/footer.html", function () {
     // when footer is loaded add date to footer
