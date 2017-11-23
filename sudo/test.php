@@ -1,8 +1,18 @@
 <?php 
-include_once("functions.php");
-include_once("data.php");
+include('functions.php');
 
-var_dump(pullBlogPosts());
+$hash = encrypt("Tintgpitwtij@t2969");
+echo $hash;
+
+if (password_verify("test", $hash )){
+  echo '</br>';
+  echo 'password matches';
+}
+else{
+  echo '</br>';
+  echo 'password does not match';
+}
+
 
 
 ?>

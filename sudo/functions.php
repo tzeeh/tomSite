@@ -19,7 +19,9 @@
   return $dbc;
   
   }
-function encrypt(){
-  
-}
+  function encrypt($str){    
+    
+    
+    return password_hash($str, PASSWORD_DEFAULT);
+  }
 ?>
