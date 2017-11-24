@@ -1,7 +1,7 @@
 <?php 
 include('functions.php');
 
-$hash = encrypt("Tintgpitwtij@t2969");
+$hash = encrypt("tnXDk0YmCOyKisk9");
 echo $hash;
 
 if (password_verify("test", $hash )){

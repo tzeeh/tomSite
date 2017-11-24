@@ -42,7 +42,7 @@ else{
       <form class="form-signin" method="post"action="<?echo($_SERVER['PHP_SELF']) ?>">
           <h2 class="form-signin-heading">Please sign in</h2>
           <? echo $alert;?>
-        <input type="text" name="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+        <input type="email" name="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
         <input type="password" name="inputPassword" class="form-control" placeholder="Password" required="">
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
