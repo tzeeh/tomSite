@@ -1,4 +1,5 @@
 <?php 
+set_include_path('/opt/lampp/htdocs/tom/tomsSite/includes/');
 include_once("functions.php");
   $dbh = connectDB();
   $sql = "SELECT u.display_name,
@@ -9,7 +10,6 @@ include_once("functions.php");
           INNER JOIN users u
           ON p.post_author = u.id
           WHERE post_status = 'publish'
-          AND post_type = 'post'
           ORDER BY post_date DESC
           LIMIT 5
           ";

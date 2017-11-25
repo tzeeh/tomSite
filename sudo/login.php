@@ -1,9 +1,11 @@
 <?php
 $alert = "";
+set_include_path('/opt/lampp/htdocs/tom/tomsSite/includes/');
+
 if (isset($_POST['inputEmail'])){
   include_once("functions.php");
   $dbh = connectDB();
-  $sql = "SELECT pass,display_name
+  $sql = "SELECT id,pass,display_name
         FROM users
         WHERE email = :email
         ";
@@ -14,6 +16,7 @@ $cDir = $_SERVER['PHP_SELF'];
 if (password_verify($_POST['inputPassword'],$creds['pass'])){
   session_start();
   $_SESSION['display_name'] = $creds['display_name'];
+  $_SESSION['user_id'] = $creds['id'];
   header("Location: pages/index.php");
 }
 else{
@@ -50,5 +53,5 @@ else{
     </div>
     
   </body>
-  <? include_once("../html/footer.html")?>
+  <? include_once("html/footer.html")?>
   </html>

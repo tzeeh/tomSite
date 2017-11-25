@@ -2,7 +2,7 @@ $(function () {
   $.ajax({
       url: "sudo/data.php",
       method: "get",
-      format: "json",
+      format: "html"
     })
     .done(function (data) {
       console.log(data);

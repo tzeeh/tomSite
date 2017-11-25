@@ -1,7 +1,7 @@
 // page init
 $(function () {
   // load navbar
-  $("#navigation").load("html/navigation.html", function () {
+  $("#navigation").load("includes/html/navigation.html", function () {
     // when nav is loaded check which page loaded then add active to correct class
     var pathname = window.location.pathname;
     pathname = pathname.replace(/^.*[\\\/]/, '');
@@ -16,7 +16,7 @@ $(function () {
 
   });
   // load footer
-  $("#footer").load("html/footer.html", function () {
+  $("#footer").load("includes/html/footer.html", function () {
     // when footer is loaded add date to footer
     var currentYear = (new Date).getFullYear();
     if (currentYear != "2017") {
