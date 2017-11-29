@@ -20,13 +20,56 @@
   return $dbc;
   
   }
-  
-  function easyData ($action , $table, $columns,$conditions=null,$limit=null ) {
+  function ezInsert ($table, $columns) {
     $results = array(
       "success"=>true,
       "error"=>false
     );
-    if ($action == "select") {
+    $dbh = connectDB();
+    $sql = "INSERT INTO $table ( ";
+    $count = 0;
+    foreach($columns as $key => $value){
+      $count++;
+      if($count >= count($columns)){
+        $sql.= "$key ";
+      }
+      else{
+        $sql.= "$key, ";
+      }
+
+    }
+    $sql.= ") VALUES ( ";
+    $count = 0;
+    foreach($columns as $key => $value){
+      $count++;
+      if($count >= count($columns)){
+        $sql.= "? ";
+      }
+      else{
+        $sql.= "?, ";
+      }
+
+    }
+    $sql .= ")";
+    try {
+      $sth = $dbh->prepare($sql);
+      $sth->execute(array_values($columns));
+    }
+    catch (PDOException $e) {
+      $results = array(
+        "success"=>false,
+        "error"=>$e->getMessage()
+      );
+      
+    }
+    return $results;
+
+  }
+  function ezSelect ($table, $columns,$conditions=null,$limit=null,$orderBy=null) {
+    $results = array(
+      "success"=>true,
+      "error"=>false
+    );
       $dbh = connectDB();
       $sql = "SELECT ";
       for ($i = 0;$i < count($columns); $i++){
@@ -55,14 +98,18 @@
         if( !empty($limit)){
           $sql.= " LIMIT ".$limit;
         }
+        if( !empty($orderBy)){
+          foreach($orderBy as $key => $value){
+            $sql.= " ORDER BY $key $value";
+          }
+        }
         try {
           $sth = $dbh->prepare($sql);
           $sth->execute(array_values($conditions));
           $row = array();
-          while($row = $sth->fetch(PDO::FETCH_ASSOC)){
-              $data[]= $row;
-            }
-            $results['data'] = $data;
+          $data = array();
+          $data = $sth->fetchAll(PDO::FETCH_ASSOC);
+          $results['entries'] = $data;
         }
         catch (PDOException $e) {
           $results = array(
@@ -71,96 +118,56 @@
           );          
         }   
         return $results; 
+
+      }
+  function ezUpdate ($table, $columns,$conditions) {
+    $results = array(
+      "success"=>true,
+      "error"=>false
+    );
+    $dbh = connectDB();
+    $sql = "UPDATE $table";
+    $sql .= " SET ";
+    $count = 0;
+    foreach($columns as $key => $value){
+      $count++;
+      if($count >= count($columns)){
+        $sql.= "$key = ?";
+      }
+      else{
+        $sql.= "$key = ?,";
+      }
     }
-    elseif ($action == "update") {
-      $dbh = connectDB();
-      $sql = "UPDATE $table";
-      $sql .= " SET ";
+    if (!empty($conditions)){
+      $sql.=" WHERE ";
       $count = 0;
-      foreach($columns as $key => $value){
+      foreach ($conditions as $key => $value){
         $count++;
-        if($count >= count($columns)){
+        if($count >= count($conditions)){
           $sql.= "$key = ?";
+          
         }
-        else{
-          $sql.= "$key = ?,";
-        }
-      }
-      if (!empty($conditions)){
-        $sql.=" WHERE ";
-        $count = 0;
-        foreach ($conditions as $key => $value){
-          $count++;
-          if($count >= count($conditions)){
-            $sql.= "$key = ?";
-            
-          }
-          else{            
-            $sql.= "$key = ? and ";
-          }
+        else{            
+          $sql.= "$key = ? and ";
         }
       }
-      try {
-        $colValues = array_values($columns);
-        $condValues = array_values($conditions);
-        $sth = $dbh->prepare($sql);
-        $sth->execute(array_merge($colValues,$condValues));
-      }
-      catch (PDOException $e) {
-        $results = array(
-          "success"=>false,
-          "error"=>$e->getMessage()
-        );
-        
-      }
-      return $results;
-  
     }
-    elseif ($action == "insert"){
-      $dbh = connectDB();
-      $sql = "INSERT INTO $table ( ";
-      $count = 0;
-      foreach($columns as $key => $value){
-        $count++;
-        if($count >= count($columns)){
-          $sql.= "$key ";
-        }
-        else{
-          $sql.= "$key, ";
-        }
-  
-      }
-      $sql.= ") VALUES ( ";
-      $count = 0;
-      foreach($columns as $key => $value){
-        $count++;
-        if($count >= count($columns)){
-          $sql.= "? ";
-        }
-        else{
-          $sql.= "?, ";
-        }
-  
-      }
-      $sql .= ")";
-      try {
-        $sth = $dbh->prepare($sql);
-        $sth->execute(array_values($columns));
-      }
-      catch (PDOException $e) {
-        $results = array(
-          "success"=>false,
-          "error"=>$e->getMessage()
-        );
-        
-      }
-      return $results;
-  
+    try {
+      $colValues = array_values($columns);
+      $condValues = array_values($conditions);
+      $sth = $dbh->prepare($sql);
+      $sth->execute(array_merge($colValues,$condValues));
     }
-    else {
-      return "First Paramater wrong.....";
+    catch (PDOException $e) {
+      $results = array(
+        "success"=>false,
+        "error"=>$e->getMessage()
+      );
+      
     }
+    return $results;
   }
+  
   function encrypt($str){        
     
     return password_hash($str, PASSWORD_DEFAULT);

@@ -1,13 +1,8 @@
 <?php 
-include('functions.php');
-$columns = array(
-  "post_date",
-  "post_content"
-  
-);
-$conditions = array(
-  "ID"=>693
-);
-print_r(easyData('select','posts', $columns,$conditions));
+set_include_path('/opt/lampp/htdocs/tom/tomsSite/includes/');
+include_once("functions.php");
 
+
+$actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+echo $actual_link;
 ?>

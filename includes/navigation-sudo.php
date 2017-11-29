@@ -9,7 +9,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand">Admin Pages</a>
+        <a href="../../index.html"class="navbar-brand">Home</a>
       </div>
   
       <!-- Collect the nav links, forms, and other content for toggling -->
