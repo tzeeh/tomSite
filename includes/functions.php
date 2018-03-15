@@ -1,15 +1,16 @@
 <?php
-
+var_dump(connectDB());
   function connectDB() {
-      if(file_get_contents('/opt/lampp/htdocs/tom/config.json')){
-        $contents = file_get_contents('/opt/lampp/htdocs/tom/config.json');
+      if(file_get_contents('/opt/lampp/htdocs/tomSite/config.json')){
+        $contents = file_get_contents('/opt/lampp/htdocs/tomSite/config.json');
         $creds = json_decode($contents,true);
+        print_r($creds);
         $hostname = $creds["hostname"];
         $database = $creds["database"];
         $username = $creds["username"];
         $password = $creds["password"];
         try {
-          $dbc = new PDO("mysql:host=$hostname;dbname=$database;charset=utf8", $username, $password);
+          $dbc = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
           } catch (PDOException $e) {
             return "Error!: " . $e->getMessage() . "<br/>";
           die();

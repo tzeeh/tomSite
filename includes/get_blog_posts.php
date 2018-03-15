@@ -1,5 +1,5 @@
 <?php 
-set_include_path('/opt/lampp/htdocs/tom/tomsSite/includes/');
+set_include_path('/opt/lampp/htdocs/tomsSite/includes/');
 include_once("functions.php");
 if(!isset($_GET['post_name'])){
   $_GET['post_name']='';

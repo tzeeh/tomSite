@@ -2,7 +2,7 @@
 set_include_path('/opt/lampp/htdocs/tom/tomsSite/includes/');
 include_once("functions.php");
 $columns = array(
-  "ID",
+  "id",
   "post_title"
   
 );
