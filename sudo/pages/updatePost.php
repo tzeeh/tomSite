@@ -1,6 +1,6 @@
 <?php
 session_start();
-set_include_path('/opt/lampp/htdocs/tom/tomsSite/includes/');
+set_include_path('/opt/lampp/htdocs/tomSite/includes/');
 include_once("functions.php");
 if(!isset($_POST['inputTitle'])){
   $_POST['inputTitle']='';

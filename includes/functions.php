@@ -1,10 +1,9 @@
 <?php
-var_dump(connectDB());
+
   function connectDB() {
       if(file_get_contents('/opt/lampp/htdocs/tomSite/config.json')){
         $contents = file_get_contents('/opt/lampp/htdocs/tomSite/config.json');
         $creds = json_decode($contents,true);
-        print_r($creds);
         $hostname = $creds["hostname"];
         $database = $creds["database"];
         $username = $creds["username"];

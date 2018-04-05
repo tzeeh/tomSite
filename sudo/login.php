@@ -1,19 +1,18 @@
 <?php
 $alert = "";
-set_include_path('/opt/lampp/htdocs/tom/tomsSite/includes/');
-
-if (isset($_POST['inputEmail'])){
+if (isset($_POST['inputUser'])){
   include_once("functions.php");
   $dbh = connectDB();
-  $sql = "SELECT id,pass,display_name
+  $sql = "SELECT id,user_pass,display_name
         FROM users
-        WHERE email = :email
+        WHERE user_login = :userLogin
         ";
 $sth = $dbh->prepare($sql);
-$sth->execute( array(":email" => $_POST['inputEmail']));
+$sth->execute( array(":userLogin" => $_POST['inputUser']));
 $creds = $sth->fetch(PDO::FETCH_ASSOC);
 $cDir = $_SERVER['PHP_SELF'];
-if (password_verify($_POST['inputPassword'],$creds['pass'])){
+print_r($creds);
+if (password_verify($_POST['inputPassword'],$creds['user_pass'])){
   session_start();
   $_SESSION['display_name'] = $creds['display_name'];
   $_SESSION['user_id'] = $creds['id'];
@@ -21,7 +20,7 @@ if (password_verify($_POST['inputPassword'],$creds['pass'])){
 }
 else{
   $alert = "<div class='alert alert-danger' role='alert'>
-            <strong>Error!</strong> Wrong Email or Password.
+            <strong>Error!</strong> Wrong Username or Password.
             </div>";
 }
 
@@ -44,8 +43,8 @@ else{
     <div class="container"> 
       <form class="form-signin" method="post"action="<?echo($_SERVER['PHP_SELF']) ?>">
           <h2 class="form-signin-heading">Please sign in</h2>
-          <? echo $alert;?>
-        <input type="email" name="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+          <?= $alert;?>
+        <input type="text" name="inputUser" class="form-control" placeholder="Username" required="" autofocus="">
         <input type="password" name="inputPassword" class="form-control" placeholder="Password" required="">
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

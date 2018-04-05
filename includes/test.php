@@ -1,5 +1,4 @@
 <?php 
-set_include_path('/opt/lampp/htdocs/tomsSite/includes/');
 include_once("functions.php");
 
 
