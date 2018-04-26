@@ -34,12 +34,9 @@ CREATE TABLE `posts` (
   `post_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `post_content` longtext NOT NULL,
   `post_title` text NOT NULL,
-  `post_excerpt` text NOT NULL,
   `post_status` varchar(20) NOT NULL DEFAULT 'publish',
   `post_name` varchar(200) NOT NULL DEFAULT '',
   `post_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `post_content_filtered` longtext NOT NULL,
-  `guid` varchar(255) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -52,12 +49,6 @@ CREATE TABLE `users` (
   `ID` bigint(20) UNSIGNED NOT NULL,
   `user_login` varchar(60) NOT NULL DEFAULT '',
   `user_pass` varchar(255) NOT NULL DEFAULT '',
-  `user_nicename` varchar(50) NOT NULL DEFAULT '',
-  `user_email` varchar(100) NOT NULL DEFAULT '',
-  `user_url` varchar(100) NOT NULL DEFAULT '',
-  `user_registered` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `user_activation_key` varchar(255) NOT NULL DEFAULT '',
-  `user_status` int(11) NOT NULL DEFAULT '0',
   `display_name` varchar(250) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -79,9 +70,7 @@ ALTER TABLE `posts`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `user_login_key` (`user_login`),
-  ADD KEY `user_nicename` (`user_nicename`),
-  ADD KEY `user_email` (`user_email`);
+  ADD KEY `user_login_key` (`user_login`)
 
 --
 -- AUTO_INCREMENT for dumped tables
