@@ -1,8 +1,9 @@
 <?php
 
   function connectDB() {
-      if(file_get_contents('/opt/lampp/htdocs/tomSite/config.json')){
-        $contents = file_get_contents('/opt/lampp/htdocs/tomSite/config.json');
+      $configLocation = '/opt/lampp/htdocs/tomSite/config.json';
+      if(file_get_contents($configLocation)){
+        $contents = file_get_contents($configLocation);
         $creds = json_decode($contents,true);
         $hostname = $creds["hostname"];
         $database = $creds["database"];
@@ -168,8 +169,7 @@
     return $results;
   }
   
-  function encrypt($str){        
-    
+  function encrypt($str){           
     return password_hash($str, PASSWORD_DEFAULT);
   }
 ?>

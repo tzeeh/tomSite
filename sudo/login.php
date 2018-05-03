@@ -1,28 +1,40 @@
 <?php
 $alert = "";
+set_include_path('/opt/lampp/htdocs/tomSite/includes/');
 if (isset($_POST['inputUser'])){
   include_once("functions.php");
   $dbh = connectDB();
-  $sql = "SELECT id,user_pass,display_name
-        FROM users
-        WHERE user_login = :userLogin
-        ";
-$sth = $dbh->prepare($sql);
-$sth->execute( array(":userLogin" => $_POST['inputUser']));
-$creds = $sth->fetch(PDO::FETCH_ASSOC);
-$cDir = $_SERVER['PHP_SELF'];
-print_r($creds);
-if (password_verify($_POST['inputPassword'],$creds['user_pass'])){
-  session_start();
-  $_SESSION['display_name'] = $creds['display_name'];
-  $_SESSION['user_id'] = $creds['id'];
-  header("Location: pages/index.php");
-}
-else{
-  $alert = "<div class='alert alert-danger' role='alert'>
-            <strong>Error!</strong> Wrong Username or Password.
-            </div>";
-}
+  $columns = array(
+    'id',
+    'user_pass',
+    'display_name'
+  );
+    $conditions = array(
+    'user_login'=>$_POST['inputUser']
+  );
+  $data = ezSelect('users',$columns,$conditions);
+  if($data['success']){
+    $creds = $data['entries'][0];
+    $cDir = $_SERVER['PHP_SELF'];
+    if (password_verify($_POST['inputPassword'],$creds['user_pass'])){
+      session_start();
+      $_SESSION['display_name'] = $creds['display_name'];
+      $_SESSION['user_id'] = $creds['id'];
+      header("Location: pages/index.php");
+    }
+    else{
+      $message = 'Username or Password is wrong.';
+      $alert = "<div class='alert alert-danger' role='alert'>
+      <strong>Error!</strong> $message
+      </div>";
+    }
+  }
+  else{
+    $message = $data['error'];
+    $alert = "<div class='alert alert-danger' role='alert'>
+    <strong>Error!</strong> $message
+    </div>";
+  }
 
 }
 ?>
@@ -43,14 +55,14 @@ else{
     <div class="container"> 
       <form class="form-signin" method="post"action="<?echo($_SERVER['PHP_SELF']) ?>">
           <h2 class="form-signin-heading">Please sign in</h2>
-          <?= $alert;?>
+          <? echo $alert;?>
         <input type="text" name="inputUser" class="form-control" placeholder="Username" required="" autofocus="">
         <input type="password" name="inputPassword" class="form-control" placeholder="Password" required="">
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
     </div>
-    
+    <?=encrypt('pass')?>
   </body>
   <? include_once("html/footer.html")?>
   </html>

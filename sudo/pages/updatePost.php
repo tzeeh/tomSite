@@ -1,6 +1,5 @@
 <?php
 session_start();
-set_include_path('/opt/lampp/htdocs/tomSite/includes/');
 include_once("functions.php");
 if(!isset($_POST['inputTitle'])){
   $_POST['inputTitle']='';
@@ -57,7 +56,7 @@ else{
     "post_status"=>$status,
     "tags"=>$_POST['inputTags'],
     "post_date"=>date("Y-m-d H:i:s"),
-    "post_title"=> $_POST['inputName']
+    "post_name"=> $_POST['inputName']
   );
   $result = ezInsert('posts',$columns);
   if($result['success']){
@@ -67,7 +66,6 @@ else{
   }
   else{
     $error = $result[2];
-    var_dump($error);
     $alert = "<div class='alert alert-danger' role='alert'>
     <strong>Error!</strong> $error
     </div>";
@@ -110,7 +108,7 @@ else{
         <input class="form-control"type="text" id="inputTitle"name="inputTitle"placeholder="Title"required>
         <input class="form-control"type="text" id="inputName"name="inputName"placeholder="Short address name"required>
         <textarea id="inputContent"name="inputContent" class="form-control" cols="30" rows="10"placeholder="Insert HTML Here"required></textarea>
-        <input class="form-control"type="text" id="inputTags"name="inputTags"placeholder="Tags (Separate by ',')">
+        <input class="form-control"type="text" id="inputTags"name="inputTags"placeholder="Tags (Separate by ',')"required>
         <button type="submit" name="btnDraft"class="btn btn-primary btn-block">Save as Draft</button>
         <button type="submit" name="btnPublish"class="btn btn-primary btn-block">Publish</button>
       </form>

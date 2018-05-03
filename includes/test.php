@@ -1,11 +1,13 @@
 <?php 
 include_once("functions.php");
-$actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-echo $actual_link;
-$table = "posts";
+$table = "users";
 $columns = array(
-    "ID"    
+    "user_login",
+    "user_pass"  
+);
+$conditions = array(
+    "ID"=>1
 );
 $data = ezSelect($table,$columns);
-print_r($data);
+print_r($data['entries']);
 ?>
