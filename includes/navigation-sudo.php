@@ -15,13 +15,13 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <?
+          <?php
           $file = scandir("."); 
-          for($i=2; $i < count($file); $i++):?>
-          <li>
-            <a href="<?php echo$file[$i]?>"><?php echo$file[$i]?></a>
-          </li>
-          <?php endfor;?>
+          for($i=2; $i < count($file); $i++){
+            echo "<li>";
+            echo "<a href={$file[$i]}>{$file[$i]}</a>";
+            echo "</li>";
+          }?>
             
             </ul>
           </li>
