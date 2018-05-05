@@ -1,5 +1,7 @@
 // page init
 $(function () {
+  // load header
+  $("#commonSources").load("includes/html/commonSources.html");
   // load navbar
   $("#navigation").load("includes/html/navigation.html", function () {
     // when nav is loaded check which page loaded then add active to correct class

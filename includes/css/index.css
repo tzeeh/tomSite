@@ -2,3 +2,12 @@
     max-width: 500px;
     margin:auto;
 }
+img{
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    width : 40%;
+}
+.jumboText{
+    text-align: center;
+}
