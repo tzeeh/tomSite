@@ -49,8 +49,11 @@ $sql = "SELECT u.display_name,
   $row = array();
   while($row = $sth->fetch(PDO::FETCH_ASSOC)):?>    
     <h2><a href="?post=<?echo$row['post_name']?>"><? echo $row['post_title'] ?></a></h2>
+    <span class="glyphicon glyphicon-calendar"></span>
     <span class='label label-default'><?echo $row['post_date']?></span>
+    <span class="glyphicon glyphicon-pencil"></span>
     <span class='label label-default'><?echo $row['display_name']?></span>
+    <span class="glyphicon glyphicon-search"></span>
     <span class='label label-default'><?echo $row['tags']?></span>
     <br>
     <br>

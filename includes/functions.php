@@ -106,7 +106,12 @@
         }
         try {
           $sth = $dbh->prepare($sql);
-          $sth->execute(array_values($conditions));
+          if($conditions == null){
+            $sth->execute();
+          }
+          else{
+            $sth->execute(array_values($conditions));
+          }
           $row = array();
           $data = array();
           $data = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -171,5 +176,21 @@
   
   function encrypt($str){           
     return password_hash($str, PASSWORD_DEFAULT);
+  }
+
+  function alert($result){
+    if($result['success']){
+      $alert = "<div class='alert alert-success' role='alert'>
+      <strong>YAY!</strong> Data Submitted!
+      </div>";
+    }
+    else{
+      $error = $result[2];
+      $alert = "<div class='alert alert-danger' role='alert'>
+      <strong>Error!</strong> $error
+      </div>";
+      
+    }
+    return $alert;
   }
 ?>

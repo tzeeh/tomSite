@@ -62,7 +62,6 @@ if (isset($_POST['inputUser'])){
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
     </div>
-    <?=encrypt('pass')?>
   </body>
   <? include_once("html/footer.html")?>
   </html>

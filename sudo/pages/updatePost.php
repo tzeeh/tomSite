@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once("functions.php");
+
 if(!isset($_POST['inputTitle'])){
   $_POST['inputTitle']='';
   $_POST['inputContent']='';
@@ -32,12 +33,13 @@ if($_POST['inputPost']!='insert'){
     "post_status"=>$status,
     "tags"=>$_POST['inputTags'],
     "post_date"=>date("Y-m-d H:i:s"),
-    "post_title"=> $_POST['inputName']
+    "post_name"=> $_POST['inputName']
   );
   $conditions = array(
     "ID"=>$_POST['id']
   );
   $result = ezUpdate('posts',$columns,$conditions);
+  $alert = alert($result);
 }
 else{
 
@@ -59,18 +61,8 @@ else{
     "post_name"=> $_POST['inputName']
   );
   $result = ezInsert('posts',$columns);
-  if($result['success']){
-    $alert = "<div class='alert alert-success' role='alert'>
-    <strong>YAY!</strong> Data Submitted!
-    </div>";
-  }
-  else{
-    $error = $result[2];
-    $alert = "<div class='alert alert-danger' role='alert'>
-    <strong>Error!</strong> $error
-    </div>";
-    
-  }
+  $alert = alert($result);
+  
 }
 
 
