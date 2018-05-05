@@ -93,7 +93,7 @@ else{
       <?php echo $alert;?>
       <select onchange="selectChange()"id="inputPost"name="inputPost"class="form-control">
         <option value="insert">Insert new post or select here</option>
-        <?include("get_posts_select.php")?>
+        <?php include("get_posts_select.php")?>
       </select>
       <hr>
         <input class="form-control"type="text" id="id"name="id"placeholder="ID"readonly>

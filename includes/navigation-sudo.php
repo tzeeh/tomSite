@@ -19,7 +19,7 @@
           $file = scandir("."); 
           for($i=2; $i < count($file); $i++):?>
           <li>
-            <a href="<?echo$file[$i]?>"><?echo$file[$i]?></a>
+            <a href="<?php echo$file[$i]?>"><?php echo$file[$i]?></a>
           </li>
           <?php endfor;?>
             
