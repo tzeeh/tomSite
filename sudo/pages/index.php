@@ -20,16 +20,16 @@ if(!isset($_SESSION['display_name'])){
 </head>
 
 <body>
-    <? include_once("navigation-sudo.php")?>
+    <?php include_once("navigation-sudo.php"); ?>
     <br>
     <br>
     <br>
     <br>
     <div class="container"> 
-      <?include("test.php")?>
+      <?php include_once("test.php"); ?>
   </div>
             
 </body>
-<? include_once("html/footer.html")?>
+<?php include_once("html/footer.html"); ?>
 
 </html>

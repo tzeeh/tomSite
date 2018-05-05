@@ -1,11 +1,4 @@
 <?php
-if($_SERVER['HTTP_HOST']=='localhost'){
-  $includePath = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'tomSite'.DIRECTORY_SEPARATOR.'includes'.DIRECTORY_SEPARATOR;
-}
-else{
-  $includePath = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'includes'.DIRECTORY_SEPARATOR;
-}
-set_include_path($includePath);
 $alert = "";
 if (isset($_POST['inputUser'])){
   include_once("functions.php");
@@ -59,7 +52,7 @@ if (isset($_POST['inputUser'])){
   
   <body>    
     <div class="container"> 
-      <form class="form-signin" method="post"action="<?echo($_SERVER['PHP_SELF']) ?>">
+      <form class="form-signin" method="post"action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>>
           <h2 class="form-signin-heading">Please sign in</h2>
           <? echo $alert;?>
         <input type="text" name="inputUser" class="form-control" placeholder="Username" required="" autofocus="">
