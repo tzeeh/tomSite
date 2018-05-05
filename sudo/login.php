@@ -1,6 +1,12 @@
 <?php
+if($_SERVER['HTTP_HOST']=='localhost'){
+  $includePath = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'tomSite'.DIRECTORY_SEPARATOR.'includes'.DIRECTORY_SEPARATOR;
+}
+else{
+  $includePath = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'includes'.DIRECTORY_SEPARATOR;
+}
+set_include_path($includePath);
 $alert = "";
-set_include_path('/opt/lampp/htdocs/tomSite/includes/');
 if (isset($_POST['inputUser'])){
   include_once("functions.php");
   $dbh = connectDB();

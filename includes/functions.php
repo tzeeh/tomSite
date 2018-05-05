@@ -1,7 +1,7 @@
 <?php
 
   function connectDB() {
-      $configLocation = '/opt/lampp/htdocs/tomSite/config.json';
+      $configLocation = getDir(2).'config.json';
       if(file_get_contents($configLocation)){
         $contents = file_get_contents($configLocation);
         $creds = json_decode($contents,true);
@@ -20,6 +20,15 @@
     }
   return $dbc;
   
+  }
+  function getDir ($dirAdjustment=null){
+    $currentDir = __DIR__;
+    $dirString = '';
+    $dirArray = explode(DIRECTORY_SEPARATOR,$currentDir);
+    for($i=0;$i<count($dirArray)-$dirAdjustment;$i++){
+        $dirString .= $dirArray[$i].DIRECTORY_SEPARATOR;
+    }
+    return $dirString;
   }
   function ezInsert ($table, $columns) {
     $results = array(

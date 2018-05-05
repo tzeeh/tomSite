@@ -1,13 +1,10 @@
 <?php 
 include_once("functions.php");
-$table = "users";
-$columns = array(
-    "user_login",
-    "user_pass"  
-);
-$conditions = array(
-    "ID"=>1
-);
-$data = ezSelect($table,$columns);
-print_r($data['entries']);
+if($_SERVER['HTTP_HOST']=='localhost'){
+    $includePath = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'tomSite'.DIRECTORY_SEPARATOR.'includes'.DIRECTORY_SEPARATOR;
+}
+else{
+    $includePath = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'includes'.DIRECTORY_SEPARATOR;
+}
+echo $includePath;
 ?>
