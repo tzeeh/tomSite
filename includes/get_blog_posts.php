@@ -19,7 +19,7 @@ $sth = $dbh->prepare($sql);
 $sth->execute(array($_GET['post_name']));
 $results = $sth->fetch(PDO::FETCH_ASSOC);
 if (!empty($results)): ?>
-<h1><? echo $results['post_title'] ?>;</h1>
+<h1><?php echo $results['post_title'] ?>;</h1>
 <h3>By: <?echo $results['display_name']?>;</h3>
 <hr>
 <p>Posted on <?echo $results['post_date']?>;</p>
@@ -48,7 +48,7 @@ $sql = "SELECT u.display_name,
   $sth->execute();
   $row = array();
   while($row = $sth->fetch(PDO::FETCH_ASSOC)):?>    
-    <h2><a href="?post=<?echo$row['post_name']?>"><? echo $row['post_title'] ?></a></h2>
+    <h2><a href="?post=<?echo$row['post_name']?>"><?php echo $row['post_title'] ?></a></h2>
     <span class="glyphicon glyphicon-calendar"></span>
     <span class='label label-default'><?echo $row['post_date']?></span>
     <span class="glyphicon glyphicon-pencil"></span>

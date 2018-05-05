@@ -21,14 +21,14 @@
           <li>
             <a href="<?echo$file[$i]?>"><?echo$file[$i]?></a>
           </li>
-          <? endfor;?>
+          <?php endfor;?>
             
             </ul>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?  echo $_SESSION['display_name'];?>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php  echo $_SESSION['display_name'];?>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">

@@ -83,14 +83,14 @@ else{
 </head>
 
 <body>
-    <? include_once("navigation-sudo.php")?>
+    <?php include_once("navigation-sudo.php")?>
     <br>
     <br>
     <br>
     <br>
     <div class="container"> 
       <form action="" method="post">
-      <? echo $alert;?>
+      <?php echo $alert;?>
       <select onchange="selectChange()"id="inputPost"name="inputPost"class="form-control">
         <option value="insert">Insert new post or select here</option>
         <?include("get_posts_select.php")?>
@@ -107,6 +107,6 @@ else{
     </div>
             
 </body>
-<? include_once("html/footer.html")?>
+<?php include_once("html/footer.html")?>
 
 </html>

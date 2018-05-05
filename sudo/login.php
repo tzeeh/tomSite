@@ -54,7 +54,7 @@ if (isset($_POST['inputUser'])){
     <div class="container"> 
       <form class="form-signin" method="post"action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>>
           <h2 class="form-signin-heading">Please sign in</h2>
-          <? echo $alert;?>
+          <?php echo $alert;?>
         <input type="text" name="inputUser" class="form-control" placeholder="Username" required="" autofocus="">
         <input type="password" name="inputPassword" class="form-control" placeholder="Password" required="">
         <br>
@@ -62,5 +62,5 @@ if (isset($_POST['inputUser'])){
       </form>
     </div>
   </body>
-  <? include_once("html/footer.html")?>
+  <?php include_once("html/footer.html")?>
   </html>
