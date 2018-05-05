@@ -18,8 +18,9 @@
           <?php
           $file = scandir("."); 
           for($i=2; $i < count($file); $i++){
+            $fileName = $file[$i];
             echo "<li>";
-            echo "<a href={$file[$i]}>{$file[$i]}</a>";
+            echo "<a href=$fileName>$fileName</a>";
             echo "</li>";
           }?>
             
