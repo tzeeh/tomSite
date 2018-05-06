@@ -188,6 +188,7 @@
   }
 
   function alert($result){
+    $alert = '';
     if($result['success']){
       $alert = "<div class='alert alert-success' role='alert'>
       <strong>YAY!</strong> Data Submitted!
