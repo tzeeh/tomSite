@@ -1,6 +1,8 @@
 <?php
+session_start();
 $includePath =  __DIR__.DIRECTORY_SEPARATOR.'includes';
-set_include_path($includePath);
+$_SESSION['includePath'] = $includePath;
+set_include_path($_SESSION['includePath']);
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -13,15 +15,16 @@ set_include_path($includePath);
         <?php include('html/navbar.html') ?>
         <div class="container">
             <a id="aboutme"></a>
-            <?php include('html/aboutme.html') ?>
-            <hr>
-            <?php include('html/resume.html') ?>
-            <a id="blog"></a>
-            <hr>
-            <?php include('php/blog.php') ?>
+            <div id="main">
+                <?php include('html/aboutme.html') ?>
+                <hr>
+                <?php include('html/resume.html') ?>
+                <hr>
+                <?php include('php/partials/blog.php') ?>
+            </div>
         </div>
         <hr>
-            <?php include_once('php/footer.php') ?>
+            <?php include_once('php/partials/footer.php') ?>
     </body>
 
     </html>

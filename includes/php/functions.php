@@ -1,7 +1,7 @@
 <?php
 
   function connectDB() {
-      $configLocation = getDir(2).'config.json';
+      $configLocation = getDir(4).'config.json';
       if(file_get_contents($configLocation)){
         $contents = file_get_contents($configLocation);
         $creds = json_decode($contents,true);
@@ -135,6 +135,39 @@
         return $results; 
 
       }
+  function ezCustom ($sql, $paramaters=null){
+    $results = array(
+      "success"=>null,
+      "error"=>null
+    );
+    $dbh = connectDB();
+    $sth = $dbh->prepare($sql);
+    if($sth->execute($paramaters)){
+      $tempData = $sth->fetchAll(PDO::FETCH_ASSOC);
+      $resultsCount = count($tempData);
+      if($resultsCount == 0){
+        $data = "No Results Returned";
+      }
+      elseif($resultsCount == 1){
+        $data = $tempData[0];
+      }
+      else{
+        $data = $tempData;
+      }
+      $results = array(
+      "success"=>true,
+      "error"=>false,
+      "data"=>$data
+      );
+    }
+    else{
+      $results = array(
+        "success"=>false,
+        "error"=>$sth->errorInfo()
+        );
+      }
+      return $results;
+    }
   function ezUpdate ($table, $columns,$conditions) {
     $results = array(
       "success"=>true,
